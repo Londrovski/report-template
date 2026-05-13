@@ -1,0 +1,28 @@
+% ============================================================
+%  meta/project.tex
+%  Project-level metadata. Edit this file when starting a new report.
+%  Read by main.tex, sections/00_frontmatter.tex, working-notes/00-progress.tex.
+% ============================================================
+
+% Display title (appears on title page + PDF metadata)
+\newcommand{\reporttitle}{Report Title}
+
+% Subtitle (optional — appears smaller on title page; leave empty if not needed)
+\newcommand{\reportsubtitle}{Subtitle goes here}
+
+% Author and unit/module
+\newcommand{\reportauthor}{Author Name}
+\newcommand{\reportunit}{Unit Code — Module Title}
+\newcommand{\reportgroup}{Group Designation (optional)}
+
+% Submission date and deadline (free-text — appears on title page)
+\newcommand{\reportdeadline}{DD MMM YYYY, HH:MM}
+
+% Total word limit (drives the dashboard headroom calc + title-page badge)
+% Section-level targets live as % TARGET: N comments in each section file;
+% scripts/update-targets.py regenerates meta/targets.tex from those comments.
+\newcommand{\wclimitTotal}{5000}
+
+% Bibliography style switch — change here, do not re-define in main.tex.
+% Options: numeric | authoryear | alphabetic
+\newcommand{\bibstyleChoice}{numeric}

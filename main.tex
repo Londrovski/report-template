@@ -1,0 +1,93 @@
+% ============================================================
+%  MAIN.TEX  --  report-template
+%  A modular LaTeX report skeleton — Overleaf-ready.
+%
+%  This file is a thin orchestrator. The actual content lives in:
+%
+%    meta/                  -- project name, deadline, total word limit
+%    preamble/              -- packages, colours, styling, macros
+%    working-notes/         -- internal pages (REMOVE BEFORE SUBMISSION)
+%    content/body-sections  -- ordered list of which sections to compile
+%    sections/              -- section wrappers + subsection folders
+%    references/            -- bib files
+%    figures/               -- images + FIGURES.md register
+%
+%  TO CHANGE A SETTING:
+%    Section word targets   -> scripts/update-targets.py reads section files
+%    Project metadata       -> meta/project.tex
+%    Section reading order  -> content/body-sections.tex
+%    Caption/box styling    -> preamble/{style,boxes,colours}.tex
+%    Word-count behaviour   -> preamble/wordcount.tex
+%
+%  COMPILE:  lualatex + biber  (Overleaf picks this up via .latexmkrc)
+%
+%  PACKAGE LOAD ORDER (matters!):
+%    babel -> general packages -> xcolor + colours -> hyperref ->
+%    biblatex -> tcolorbox -> styling
+% ============================================================
+
+\documentclass[11pt,a4paper]{article}
+
+% ── Project metadata + per-section word targets ─────────
+\input{meta/project}
+\input{meta/targets}
+
+% ── Preamble (split into purpose-named files) ───────────
+\input{preamble/packages}
+\input{preamble/colours}
+\input{preamble/style}
+\input{preamble/boxes}
+\input{preamble/markers}
+\input{preamble/wordcount}
+\input{preamble/shorthands}
+
+% ── Bibliography database ───────────────────────────────
+\addbibresource{references/references.bib}
+
+\begin{document}
+
+% ============================================================
+%  Front matter — title page, TOC, list of figures/tables
+%  All wrapped in %TC:ignore so it doesn't count toward limit.
+% ============================================================
+%TC:ignore
+\input{sections/00_frontmatter}
+\clearpage
+
+% ── Working notes (REMOVE/COMMENT BEFORE SUBMISSION) ────
+\input{working-notes/00-progress}
+\clearpage
+\input{working-notes/01-conventions}
+\clearpage
+\input{working-notes/02-scoring-insights}
+\clearpage
+\input{working-notes/03-known-errors}
+\clearpage
+\input{working-notes/04-rubric-improvements}
+\clearpage
+\input{working-notes/05-restore-points}
+\clearpage
+
+\input{sections/00_abbreviations}
+\clearpage
+%TC:endignore
+
+% ============================================================
+%  Report body — counted toward the word limit
+% ============================================================
+
+\input{content/body-sections}
+
+% ============================================================
+%  Back matter — references + appendices
+% ============================================================
+%TC:ignore
+\newpage
+\printbibliography[heading=bibintoc,title={References}]
+
+\appendix
+\input{sections/A1_rubric_mapping}
+\input{sections/A2_genai_acknowledgement}
+%TC:endignore
+
+\end{document}

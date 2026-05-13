@@ -1,0 +1,54 @@
+% ============================================================
+%  preamble/boxes.tex
+%  Generic notes-box environments. Project-specific
+%  decision/summary patterns should be added in your project,
+%  not here — keep this file generic.
+% ============================================================
+
+\usepackage[most]{tcolorbox}
+
+% notesbox — neutral pale-blue framed box for working-notes pages.
+\newtcolorbox{notesbox}[1][]{
+  enhanced,
+  breakable,
+  colback=decisionblue!4,
+  colframe=decisionblue!60,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,
+  before skip=8pt,after skip=8pt,
+  fonttitle=\bfseries\small,
+  title=#1,
+  attach title to upper={\par\vspace{2pt}},
+  coltitle=decisionblue!80!black
+}
+
+% insightnotesbox — green-tinted variant for "insight" / rubric working notes.
+\newtcolorbox{insightnotesbox}[1][]{
+  enhanced,
+  breakable,
+  colback=insightgreen!4,
+  colframe=insightgreen!60,
+  boxrule=0.4pt,
+  arc=2pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,
+  before skip=8pt,after skip=8pt,
+  fonttitle=\bfseries\small,
+  title=#1,
+  attach title to upper={\par\vspace{2pt}},
+  coltitle=insightgreen!80!black
+}
+
+% gapbox — red-flag for missing figures, data, decisions. Strip before submission.
+\newtcolorbox{gapbox}[1][]{
+  enhanced,
+  breakable,
+  colback=failred!6,
+  colframe=failred!70,
+  boxrule=0.6pt,
+  arc=2pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,
+  before skip=6pt,after skip=6pt,
+  fonttitle=\bfseries\small\color{failred},
+  title={GAP --- #1}
+}

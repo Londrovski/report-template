@@ -1,0 +1,60 @@
+% ============================================================
+%  preamble/packages.tex
+%  Package imports. Order matters — see main.tex comment block.
+% ============================================================
+
+% Language / typography
+\usepackage[british]{babel}
+\usepackage{csquotes}
+\usepackage{microtype}
+
+% Geometry
+\usepackage[a4paper,margin=25mm,top=22mm,bottom=22mm]{geometry}
+\setlength{\parskip}{0.4\baselineskip}
+\setlength{\parindent}{0pt}
+
+% Maths and units
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+\sisetup{
+  output-decimal-marker={.},
+  group-separator={,},
+  group-minimum-digits=4,
+  per-mode=symbol,
+  exponent-product=\cdot,
+  range-phrase={\,--\,},
+  range-units=single,
+  detect-weight=true,
+  detect-family=true
+}
+
+% Tables
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\renewcommand{\arraystretch}{1.15}
+
+% Figures
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{grffile}        % allow spaces in figure filenames
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=2pt,itemsep=2pt,parsep=0pt,leftmargin=1.2em}
+\setlist[enumerate]{topsep=2pt,itemsep=2pt,parsep=0pt,leftmargin=1.4em}
+
+% Captions (must load before cleveref)
+\usepackage[labelfont=bf,labelsep=colon,font=small,justification=centerlast]{caption}
+
+% Cross-referencing — \cref{} auto-prefixes "Table"/"Figure"/"Section"
+\usepackage[capitalise,noabbrev]{cleveref}
+
+% Conditional execution (used inside box environments)
+\usepackage{ifthen}
+
+% Verbatim (needed by wordcount mechanism)
+\usepackage{verbatim}

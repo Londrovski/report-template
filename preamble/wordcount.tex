@@ -1,0 +1,101 @@
+% ============================================================
+%  preamble/wordcount.tex
+%  Live in-PDF word count — per-section + per-subsection + total.
+%  Mechanism: \write18 runs texcount on each section, dumps .wcsum
+%  sidecars, then LaTeX reads them via \IfFileExists + \newread.
+%
+%  Two-pass compile required: first pass writes the .wcsum files,
+%  second pass reads them. Overleaf recompiles automatically.
+%
+%  Requires shell-escape (Overleaf whitelists texcount specifically).
+%  If shell-escape is disabled, counts render as "?" — not fatal.
+% ============================================================
+
+\newread\wcfile
+
+\newcommand{\readwcsum}[1]{%
+  \IfFileExists{#1.wcsum}{\input{#1.wcsum}\unskip}{?}%
+}
+
+\newcommand{\countmerged}[1]{%
+  \immediate\write18{texcount -1 -sum -merge -q #1.tex > #1.wcsum}%
+}
+\newcommand{\countsingle}[1]{%
+  \immediate\write18{texcount -1 -sum -q #1.tex > #1.wcsum}%
+}
+
+\newcommand{\addtowc}[2]{%
+  \IfFileExists{#2.wcsum}{%
+    \begingroup
+      \endlinechar=-1\relax
+      \openin\wcfile=#2.wcsum\relax
+      \read\wcfile to \wcline
+      \closein\wcfile
+      \xdef\wclineg{\wcline}%
+    \endgroup
+    \addtocounter{#1}{\wclineg}%
+  }{}%
+}
+
+%% —— Counters (one per section; extend as needed) ————————————
+\newcounter{wctotal}
+\newcounter{wcsecOne}
+\newcounter{wcsecTwo}
+\newcounter{wcsecThree}
+\newcounter{wcsecFour}
+\newcounter{wcsecFive}
+\newcounter{wcsecSix}
+
+%% —— File-path lookup tables ————————————————————————————
+\newcommand{\secnumOne}{1}\newcommand{\secfileOne}{01_introduction}
+\newcommand{\secnumTwo}{2}\newcommand{\secfileTwo}{02_market}
+\newcommand{\secnumThree}{3}\newcommand{\secfileThree}{03_section}
+\newcommand{\secnumFour}{4}\newcommand{\secfileFour}{04_section}
+\newcommand{\secnumFive}{5}\newcommand{\secfileFive}{05_section}
+\newcommand{\secnumSix}{6}\newcommand{\secfileSix}{06_conclusion}
+
+%% —— Trigger texcount on every section + subsection —————————
+\newcommand{\runallcounts}{%
+  \countmerged{sections/01_introduction}%
+  \countmerged{sections/02_market}%
+  % Add more section files here as the report grows:
+  % \countmerged{sections/03_section}%
+  % Subsection counts (optional — only if you use subsection folders):
+  \countsingle{sections/01_introduction/11_overview}%
+  \countsingle{sections/01_introduction/12_scope}%
+  \countsingle{sections/02_market/21_landscape}%
+  \countsingle{sections/02_market/22_competitors}%
+}
+
+%% —— Per-section count badge (call at end of each section) ——————
+\newcommand{\sectionwordcount}[1]{%
+  \setcounter{wcsec#1}{0}%
+  \addtowc{wcsec#1}{sections/\csname secfile#1\endcsname}%
+  \begin{flushright}\small\itshape%
+    \ifnum\value{wcsec#1}>\csname wclimit#1\endcsname
+      \textcolor{failred}{[\arabic{wcsec#1}\ /\ \csname wclimit#1\endcsname\ words\ \textbf{OVER LIMIT}]}%
+    \else
+      \textcolor{commentgrey}{[\arabic{wcsec#1}\ /\ \csname wclimit#1\endcsname\ words]}%
+    \fi
+  \end{flushright}%
+}
+
+%% —— Section subtotal (bare number, for tables) ————————————————
+\newcommand{\sectionsubtotal}[1]{%
+  \setcounter{wcsec#1}{0}%
+  \addtowc{wcsec#1}{sections/\csname secfile#1\endcsname}%
+  \arabic{wcsec#1}%
+}
+
+%% —— Grand total ————————————————————————————————————————
+\newcommand{\totalwordcount}{%
+  \setcounter{wctotal}{0}%
+  \addtowc{wctotal}{sections/01_introduction}%
+  \addtowc{wctotal}{sections/02_market}%
+  % Add more here in lockstep with content/body-sections.tex:
+  % \addtowc{wctotal}{sections/03_section}%
+  \arabic{wctotal}%
+}
+
+% Trigger all the texcount calls at the start of the document.
+\AtBeginDocument{\runallcounts}

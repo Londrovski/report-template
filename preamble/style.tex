@@ -1,0 +1,34 @@
+% ============================================================
+%  preamble/style.tex
+%  Heading styles, hyperlink colours, biblatex setup.
+%  Loaded AFTER colours.tex, BEFORE boxes.tex.
+% ============================================================
+
+% Hyperlinks — must be loaded after colours, before biblatex
+\usepackage[
+  colorlinks=true,
+  linkcolor=linkblue,
+  citecolor=linkblue,
+  urlcolor=linkblue,
+  pdftitle={\reporttitle},
+  pdfauthor={\reportauthor}
+]{hyperref}
+
+% Bibliography — biblatex with biber backend
+\usepackage[
+  backend=biber,
+  style=\bibstyleChoice,
+  sorting=none,
+  maxbibnames=99,
+  maxcitenames=2,
+  uniquelist=false,
+  dashed=false
+]{biblatex}
+
+% Section heading style — modest, no dramatic font changes.
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{primarynavy}}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\large\bfseries\color{textgrey}}{\thesubsection}{0.7em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\itshape\color{textgrey}}{\thesubsubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{1.6\baselineskip}{0.6\baselineskip}
+\titlespacing*{\subsection}{0pt}{1.2\baselineskip}{0.4\baselineskip}

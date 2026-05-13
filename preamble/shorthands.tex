@@ -1,0 +1,24 @@
+% ============================================================
+%  preamble/shorthands.tex
+%  Drafting markers + project-agnostic shortcuts.
+% ============================================================
+
+% \todo{...} — inline drafting marker. Renders as orange tag.
+% Excluded from word count via texcount.cfg.
+\newcommand{\todo}[1]{\textcolor{warnamber}{\textbf{[TODO:}\ #1\textbf{]}}}
+
+% \needcite{description} — flag a citation you still need to add.
+\newcommand{\needcite}[1]{\textcolor{warnamber}{\textbf{[CITE:}\ #1\textbf{]}}}
+
+% \gap{description} — inline gap marker (paired with gapbox environment).
+\newcommand{\gap}[1]{\textcolor{failred}{\textbf{[GAP:}\ #1\textbf{]}}}
+
+% \pass / \fail / \warn — emphasis colour tags for numbers in tables and prose.
+\newcommand{\pass}[1]{\textcolor{passgreen}{\textbf{#1}}}
+\newcommand{\fail}[1]{\textcolor{failred}{\textbf{#1}}}
+\newcommand{\warn}[1]{\textcolor{warnamber}{\textbf{#1}}}
+
+% Row-colour cell helpers for pass/fail/warn columns in tables.
+\newcommand{\passcell}{\cellcolor{passgreen!12}}
+\newcommand{\failcell}{\cellcolor{failred!12}}
+\newcommand{\warncell}{\cellcolor{warnamber!12}}
