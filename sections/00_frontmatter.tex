@@ -1,0 +1,31 @@
+% sections/00_frontmatter.tex — Title page, TOC, LoF/LoT.
+% Wrapped by main.tex in %TC:ignore — not counted toward limit.
+
+\begin{titlepage}
+  \vspace*{4cm}
+  \begin{center}
+    {\Huge\bfseries\color{primarynavy}\reporttitle\par}
+    \vspace{0.6cm}
+    {\Large\itshape\color{textgrey}\reportsubtitle\par}
+    \vspace{2.5cm}
+    {\large\reportauthor\par}
+    \vspace{0.4cm}
+    {\large\reportunit\par}
+    \vspace{0.2cm}
+    {\large\reportgroup\par}
+    \vfill
+    \begin{tabular}{rl}
+      \textbf{Deadline:}    & \reportdeadline   \\
+      \textbf{Word limit:}  & \wclimitTotal\ words \\
+      \textbf{Word count:}  & \totalwordcount\ \\
+    \end{tabular}
+  \end{center}
+\end{titlepage}
+
+\renewcommand{\contentsname}{Table of Contents}
+\tableofcontents
+\newpage
+\listoffigures
+\addcontentsline{toc}{section}{List of Figures}
+\listoftables
+\addcontentsline{toc}{section}{List of Tables}
