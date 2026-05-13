@@ -1,0 +1,32 @@
+# LaTeX build artefacts
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.run.xml
+*.nav
+*.snm
+*.vrb
+
+# texcount sidecars (regenerated on each compile)
+*.wcsum
+
+# Editor / OS
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/
+__pycache__/
+*.pyc
+
+# Built PDF (uncomment if you don't want PDFs committed)
+# main.pdf
